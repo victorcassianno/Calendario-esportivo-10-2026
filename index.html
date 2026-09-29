@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://ge.globo.com/favicon.ico">
+
+    <title>GE Europa | Futebol Europeu</title>
+    <style>
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f5f0;
+            color: #303830;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(225, 240, 230, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #cfdfd3;
+        }
+
+        .header-content {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #304238;
+        }
+
+        .logo-ge {
+            background: #87b69a;
+            color: white;
+            font-size: 25px;
+            font-weight: 900;
+            padding: 5px 9px;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #506158;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        nav a:hover {
+            color: #739b83;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            padding: 85px 0;
+            background: linear-gradient(
+                135deg,
+                #e3f0e7,
+                #f8e9df
+            );
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #f0d8c8;
+            color: #806353;
+            padding: 7px 13px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 65px);
+            line-height: 1.02;
+            color: #29362f;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: #68766e;
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            border: none;
+            background: #86b59a;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .btn:hover {
+            background: #709b82;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           DESTAQUE
+        ========================= */
+
+        .featured {
+            background: rgba(255,255,255,.8);
+            border: 1px solid #d8e2da;
+            border-radius: 22px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(80,100,85,.08);
+        }
+
+        .featured small {
+            color: #a67862;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .featured-date {
+            margin-top: 16px;
+            color: #769682;
+            font-weight: 800;
+        }
+
+        .featured h2 {
+            margin: 12px 0;
+            font-size: 27px;
+            line-height: 1.3;
+        }
+
+        .featured h2 span {
+            color: #a7b8ac;
+            padding: 0 5px;
+        }
+
+        .featured p {
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .featured-time {
+            color: #698b76;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        /* =========================
+           TIMES
+        ========================= */
+
+        .teams-section {
+            padding: 70px 0;
+            background: #fffdf9;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+        }
+
+        .section-title span {
+            color: #a87861;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .section-title h2 {
+            margin-top: 5px;
+            font-size: 36px;
+            color: #354038;
+        }
+
+        .teams {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .team {
+            padding: 25px 15px;
+            border-radius: 17px;
+            text-align: center;
+            border: 1px solid #dfe5df;
+            transition: .25s;
+            cursor: pointer;
+        }
+
+        .team:hover {
+            transform: translateY(-5px);
+        }
+
+        .team:nth-child(1) {
+            background: #e6f0fa;
+        }
+
+        .team:nth-child(2) {
+            background: #f8e6e6;
+        }
+
+        .team:nth-child(3) {
+            background: #f2eee1;
+        }
+
+        .team:nth-child(4) {
+            background: #eeeaf7;
+        }
+
+        .team:nth-child(5) {
+            background: #f7e8e8;
+        }
+
+        .team-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .team h3 {
+            font-size: 15px;
+            color: #3c483f;
+        }
+
+        /* =========================
+           FILTROS
+        ========================= */
+
+        .schedule {
+            padding: 75px 0;
+            background: #f7f5f0;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .filter {
+            border: 1px solid #d7ded8;
+            background: #fffdfa;
+            color: #5b685f;
+            padding: 9px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            transition: .2s;
+        }
+
+        .filter:hover,
+        .filter.active {
+            background: #8bb69b;
+            border-color: #8bb69b;
+            color: white;
+        }
+
+        /* =========================
+           DIA
+        ========================= */
+
+        .day {
+            margin-bottom: 28px;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #e2eee6;
+            padding: 15px 20px;
+            border-radius: 14px 14px 0 0;
+            border: 1px solid #d2dfd5;
+        }
+
+        .day-header h3 {
+            font-size: 18px;
+            color: #35463b;
+        }
+
+        .day-header span {
+            color: #789281;
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        /* =========================
+           JOGOS
+        ========================= */
+
+        .matches {
+            background: #fffdfa;
+            border: 1px solid #e2e0d8;
+            border-top: none;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .match {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 17px 20px;
+            border-bottom: 1px solid #eeeae2;
+            transition: .2s;
+        }
+
+        .match:last-child {
+            border-bottom: none;
+        }
+
+        .match:hover {
+            background: #faf8f2;
+        }
+
+        .match-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .competition {
+            color: #a47864;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+        }
+
+        .teams-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            color: #39453d;
+            font-size: 14px;
+        }
+
+        .vs {
+            color: #a8b4ac;
+        }
+
+        .time {
+            background: #edf4ef;
+            color: #638570;
+            padding: 7px 11px;
+            border-radius: 8px;
+            font-weight: 900;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* DESTAQUE CHAMPIONS */
+
+        .champions .day-header {
+            background: #eae5f3;
+            border-color: #ddd6e9;
+        }
+
+        .champions .day-header span {
+            color: #88779e;
+        }
+
+        .highlight {
+            background: #fff1df;
+        }
+
+        .highlight:hover {
+            background: #ffeed8;
+        }
+
+        .highlight .competition {
+            color: #b07857;
+        }
+
+        .highlight .time {
+            background: #f1dcc7;
+            color: #90654c;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #dcebe1;
+            padding: 45px 0;
+            text-align: center;
+            color: #65736b;
+        }
+
+        footer .footer-logo {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-size: 13px;
+        }
+
+        footer small {
+            display: block;
+            margin-top: 5px;
+            color: #829087;
+        }
+
+        /* =========================
+           ANIMAÇÕES
+        ========================= */
+
+        .fade {
+            animation: fadeIn .5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media(max-width: 850px) {
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .teams {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media(max-width: 600px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 55px 0;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .teams {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .match {
+                padding: 15px;
+            }
+
+            .teams-name {
+                display: block;
+                line-height: 1.7;
+            }
+
+            .vs {
+                margin: 0 4px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="container header-content">
+
+            <a href="#" class="logo">
+                <span class="logo-ge">GE</span>
+                <span class="logo-text">EUROPA</span>
+            </a>
+
+            <nav>
+                <a href="#inicio">Início</a>
+                <a href="#times">Times</a>
+                <a href="#agenda">Agenda</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <main id="inicio">
+
+        <section class="hero">
+
+            <div class="container hero-grid">
+
+                <div>
+
+                    <span class="tag">
+                        FUTEBOL EUROPEU • OUTUBRO 2026
+                    </span>
+
+                    <h1>
+                        Os grandes jogos da Europa.
+                    </h1>
+
+                    <p>
+                        Acompanhe os principais jogos de Manchester City,
+                        Arsenal, Real Madrid, Barcelona e Bayern de Munique
+                        durante outubro.
+                    </p>
+
+                    <button class="btn" onclick="irParaAgenda()">
+                        Ver jogos
+                    </button>
+
+                </div>
+
+
+                <div class="featured">
+
+                    <small>
+                        JOGO EM DESTAQUE
+                    </small>
+
+                    <div class="featured-date">
+                        21 DE OUTUBRO
+                    </div>
+
+                    <h2>
+                        Bayern de Munique
+                        <span>×</span>
+                        Arsenal
+                    </h2>
+
+                    <p>
+                        UEFA Champions League
+                    </p>
+
+                    <div class="featured-time">
+                        16:00
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             TIMES
+        ========================== -->
+
+        <section class="teams-section" id="times">
+
+            <div class="container">
+
+                <div class="section-title">
+
+                    <span>
+                        CLUBES EM DESTAQUE
+                    </span>
+
+                    <h2>
+                        Os grandes da Europa
+                    </h2>
+
+                </div>
+
+
+                <div class="teams">
+
+                    <div class="team">
+                        <div class="team-icon">🔵</div>
+                        <h3>Manchester City</h3>
+                    </div>
+
+                    <div class="team">
+                        <div class="team-icon">🔴</div>
+                        <h3>Arsenal</h3>
+                    </div>
+
+                    <div class="team">
+                        <div class="team-icon">⚪</div>
+                        <h3>Real Madrid</h3>
+                    </div>
+
+                    <div class="team">
+                        <div class="team-icon">🔵</div>
+                        <h3>Barcelona</h3>
+                    </div>
+
+                    <div class="team">
+                        <div class="team-icon">🔴</div>
+                        <h3>Bayern de Munique</h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             AGENDA
+        ========================== -->
+
+        <section class="schedule" id="agenda">
+
+            <div class="container">
+
+                <div class="section-title">
+
+                    <span>
+                        OUTUBRO DE 2026
+                    </span>
+
+                    <h2>
+                        Agenda de jogos
+                    </h2>
+
+                </div>
+
+
+                <!-- FILTROS -->
+
+                <div class="filters">
+
+                    <button
+                        class="filter active"
+                        onclick="filtrar('todos', this)">
+                        Todos
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="filtrar('city', this)">
+                        Manchester City
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="filtrar('arsenal', this)">
+                        Arsenal
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="filtrar('real', this)">
+                        Real Madrid
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="filtrar('barcelona', this)">
+                        Barcelona
+                    </button>
+
+                    <button
+                        class="filter"
+                        onclick="filtrar('bayern', this)">
+                        Bayern
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+                     10 OUTUBRO
+                ========================== -->
+
+                <div class="day fade">
+
+                    <div class="day-header">
+                        <h3>10 de outubro</h3>
+                        <span>SÁBADO</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="arsenal">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Premier League
+                                </span>
+
+                                <div class="teams-name">
+                                    Arsenal
+                                    <span class="vs">×</span>
+                                    Leeds
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                08:30
+                            </span>
+
+                        </div>
+
+
+                        <div class="match" data-teams="real">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    LaLiga
+                                </span>
+
+                                <div class="teams-name">
+                                    Real Madrid
+                                    <span class="vs">×</span>
+                                    Villarreal
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                16:00
+                            </span>
+
+                        </div>
+
+
+                        <div class="match" data-teams="barcelona">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    LaLiga
+                                </span>
+
+                                <div class="teams-name">
+                                    Barcelona
+                                    <span class="vs">×</span>
+                                    Getafe
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                13:30
+                            </span>
+
+                        </div>
+
+
+                        <div class="match" data-teams="bayern">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Bundesliga
+                                </span>
+
+                                <div class="teams-name">
+                                    Augsburg
+                                    <span class="vs">×</span>
+                                    Bayern
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                10:30
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     13 OUTUBRO
+                ========================== -->
+
+                <div class="day champions fade">
+
+                    <div class="day-header">
+                        <h3>13 de outubro</h3>
+                        <span>CHAMPIONS LEAGUE</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="arsenal">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Champions League
+                                </span>
+
+                                <div class="teams-name">
+                                    Arsenal
+                                    <span class="vs">×</span>
+                                    Lille
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                16:00
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     14 OUTUBRO
+                ========================== -->
+
+                <div class="day champions fade">
+
+                    <div class="day-header">
+                        <h3>14 de outubro</h3>
+                        <span>CHAMPIONS LEAGUE</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="real">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Champions League
+                                </span>
+
+                                <div class="teams-name">
+                                    Roma
+                                    <span class="vs">×</span>
+                                    Real Madrid
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                16:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     17 OUTUBRO
+                ========================== -->
+
+                <div class="day fade">
+
+                    <div class="day-header">
+                        <h3>17 de outubro</h3>
+                        <span>SÁBADO</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="bayern">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Bundesliga
+                                </span>
+
+                                <div class="teams-name">
+                                    Bayern
+                                    <span class="vs">×</span>
+                                    RB Leipzig
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                13:30
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     18 OUTUBRO
+                ========================== -->
+
+                <div class="day fade">
+
+                    <div class="day-header">
+                        <h3>18 de outubro</h3>
+                        <span>DOMINGO</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="city">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Premier League
+                                </span>
+
+                                <div class="teams-name">
+                                    Newcastle
+                                    <span class="vs">×</span>
+                                    Manchester City
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                12:00
+                            </span>
+
+                        </div>
+
+
+                        <div class="match" data-teams="arsenal">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Premier League
+                                </span>
+
+                                <div class="teams-name">
+                                    Nottingham Forest
+                                    <span class="vs">×</span>
+                                    Arsenal
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                12:30
+                            </span>
+
+                        </div>
+
+
+                        <div class="match" data-teams="real">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    LaLiga
+                                </span>
+
+                                <div class="teams-name">
+                                    Real Madrid
+                                    <span class="vs">×</span>
+                                    Sevilla
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                16:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     20 OUTUBRO
+                ========================== -->
+
+                <div class="day champions fade">
+
+                    <div class="day-header">
+                        <h3>20 de outubro</h3>
+                        <span>CHAMPIONS LEAGUE</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="barcelona">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Champions League
+                                </span>
+
+                                <div class="teams-name">
+                                    PSG
+                                    <span class="vs">×</span>
+                                    Barcelona
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                16:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     21 OUTUBRO
+                ========================== -->
+
+                <div class="day champions fade">
+
+                    <div class="day-header">
+                        <h3>21 de outubro</h3>
+                        <span>CHAMPIONS LEAGUE</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match highlight"
+                             data-teams="bayern arsenal">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    ⭐ Jogo em destaque
+                                </span>
+
+                                <div class="teams-name">
+                                    Bayern de Munique
+                                    <span class="vs">×</span>
+                                    Arsenal
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                16:00
+                            </span>
+
+                        </div>
+
+
+                        <div class="match" data-teams="real">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Champions League
+                                </span>
+
+                                <div class="teams-name">
+                                    Real Madrid
+                                    <span class="vs">×</span>
+                                    RB Leipzig
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                16:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     25 OUTUBRO
+                ========================== -->
+
+                <div class="day fade">
+
+                    <div class="day-header">
+                        <h3>25 de outubro</h3>
+                        <span>DOMINGO</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="barcelona real">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    LaLiga
+                                </span>
+
+                                <div class="teams-name">
+                                    Barcelona
+                                    <span class="vs">×</span>
+                                    Real Madrid
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                17:00
+                            </span>
+
+                        </div>
+
+
+                        <div class="match" data-teams="bayern">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Bundesliga
+                                </span>
+
+                                <div class="teams-name">
+                                    Freiburg
+                                    <span class="vs">×</span>
+                                    Bayern
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                13:30
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     31 OUTUBRO
+                ========================== -->
+
+                <div class="day fade">
+
+                    <div class="day-header">
+                        <h3>31 de outubro</h3>
+                        <span>SÁBADO</span>
+                    </div>
+
+                    <div class="matches">
+
+                        <div class="match" data-teams="bayern">
+
+                            <div class="match-info">
+
+                                <span class="competition">
+                                    Bundesliga
+                                </span>
+
+                                <div class="teams-name">
+                                    Bayern
+                                    <span class="vs">×</span>
+                                    Borussia Dortmund
+                                </div>
+
+                            </div>
+
+                            <span class="time">
+                                14:30
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-logo">
+                GE EUROPA
+            </div>
+
+            <p>
+                Futebol europeu em destaque — Outubro de 2026.
+            </p>
+
+            <small>
+                Horários sujeitos a alterações.
+            </small>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        /* ROLAR ATÉ A AGENDA */
+
+        function irParaAgenda() {
+
+            document
+                .getElementById("agenda")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        /* FILTRO DOS TIMES */
+
+        function filtrar(time, botao) {
+
+            const jogos = document.querySelectorAll(".match");
+            const botoes = document.querySelectorAll(".filter");
+
+            /* Remove o estado ativo dos botões */
+
+            botoes.forEach(function(item) {
+                item.classList.remove("active");
+            });
+
+            /* Ativa o botão selecionado */
+
+            botao.classList.add("active");
+
+
+            /* Filtra os jogos */
+
+            jogos.forEach(function(jogo) {
+
+                const times =
+                    jogo.getAttribute("data-teams");
+
+                if (time === "todos") {
+
+                    jogo.style.display = "flex";
+
+                } else if (
+                    times &&
+                    times.includes(time)
+                ) {
+
+                    jogo.style.display = "flex";
+
+                } else {
+
+                    jogo.style.display = "none";
+
+                }
+
+            });
+
+
+            /* Esconde dias sem jogos */
+
+            document.querySelectorAll(".day").forEach(function(dia) {
+
+                const jogosVisiveis =
+                    dia.querySelectorAll(
+                        ".match[style='display: flex;']"
+                    );
+
+                if (time === "todos") {
+
+                    dia.style.display = "block";
+
+                } else if (jogosVisiveis.length > 0) {
+
+                    dia.style.display = "block";
+
+                } else {
+
+                    dia.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+
+        /* ANIMAÇÃO AO ROLAR A PÁGINA */
+
+        const elementos =
+            document.querySelectorAll(".fade");
+
+        const observer =
+            new IntersectionObserver(function(entries) {
+
+                entries.forEach(function(entry) {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                    }
+
+                });
+
+            }, {
+                threshold: 0.1
+            });
+
+
+        elementos.forEach(function(elemento) {
+
+            elemento.style.opacity = "0";
+            elemento.style.transform =
+                "translateY(15px)";
+            elemento.style.transition =
+                "opacity .5s ease, transform .5s ease";
+
+            observer.observe(elemento);
+
+        });
+
+    </script>
+
+</body>
+</html>
